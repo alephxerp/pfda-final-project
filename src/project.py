@@ -9,8 +9,10 @@ class Mouse():
         pass
 
 
-class Button():
+class Button(pygame.sprite.Sprite):
     def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+
         self.position : tuple[int, int] = (0, 0)
 
 
@@ -22,7 +24,10 @@ def main():
 
     pygame.display.set_caption("Final Project")
     screen : pygame.Surface = pygame.display.set_mode(resolution, pygame.RESIZABLE)
-    viewport : pygame.Surface = screen.copy()
+    viewport : pygame.Surface = pygame.surface.Surface((1920, 1080))
+
+    test : pygame.Surface = pygame.surface.Surface((100, 100))
+    test.fill((255, 0, 0))
 
     clock = pygame.time.Clock()
     fps = 60
@@ -30,6 +35,7 @@ def main():
 
     while running:
         viewport.fill((0, 0, 0))
+        viewport.blit(test, (50, 50))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
