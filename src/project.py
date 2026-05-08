@@ -30,8 +30,7 @@ def main() -> None:
     screen : pygame.Surface = pygame.display.set_mode(resolution, pygame.RESIZABLE)
     viewport : pygame.Surface = pygame.surface.Surface((1920, 1080))
 
-    test : pygame.Surface = pygame.surface.Surface((100, 100))
-    test.fill((255, 0, 0))
+    test : Element = Element((50, 50), "guy.png")
 
     clock = pygame.time.Clock()
     fps = 60
@@ -39,7 +38,7 @@ def main() -> None:
 
     while running:
         viewport.fill((0, 0, 0))
-        viewport.blit(test, (50, 50))
+        viewport.blit(test.image, (50, 50))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
