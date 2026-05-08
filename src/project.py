@@ -14,11 +14,11 @@ class Element(pygame.sprite.Sprite):
         self.dead : bool = False
 
 
-    def on_hover() -> None:
+    def on_hover(self) -> None:
         pass
 
     
-    def on_click() -> None:
+    def on_click(self) -> None:
         print("I have been clicked!")
 
 
@@ -68,6 +68,9 @@ def main() -> None:
             print("left clicked!")
         if mouse.right_click:
             print("right clicked!")
+
+        if test.rect.collidepoint(mouse.position) and (mouse.left_click or mouse.right_click): 
+            test.on_click()
 
         screen.blit(pygame.transform.scale(viewport, screen.get_rect().size), (0, 0))
         pygame.display.flip()
