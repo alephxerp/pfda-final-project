@@ -1,19 +1,14 @@
 import pygame, sys
 
 
-class Mouse():
-    def __init__(self):
-        self.position = [0, 0]
-
-    def update():
-        pass
-
-
 class Button(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
 
         self.position : tuple[int, int] = (0, 0)
+        self.rect : pygame.Rect = pygame.Rect()
+        self.image : pygame.Surface = pygame.image.load().convert_alpha()
+
 
 
 
