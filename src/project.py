@@ -1,18 +1,27 @@
-import pygame, sys
+import pygame, sys, os
 
 
-class Button(pygame.sprite.Sprite):
-    def __init__(self):
+class Element(pygame.sprite.Sprite):
+    def __init__(self, position : tuple[int, int], sprite : str) -> None:
         pygame.sprite.Sprite.__init__(self)
 
-        self.position : tuple[int, int] = (0, 0)
-        self.rect : pygame.Rect = pygame.Rect()
-        self.image : pygame.Surface = pygame.image.load().convert_alpha()
+        self.position : tuple[int, int] = position
+
+        self.image : pygame.Surface = pygame.image.load(os.path.join("assets", sprite)).convert_alpha()
+        self.rect : pygame.Rect = self.image.get_rect()
+        self.rect.center = position
+
+        self.dead : bool = False
+
+
+    def update(self) -> None:
+        pass
 
 
 
 
-def main():
+
+def main() -> None:
     pygame.init()
     resolution : tuple[int, int] = (1280, 720)
     running : bool = True
