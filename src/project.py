@@ -14,11 +14,22 @@ class Element(pygame.sprite.Sprite):
         self.dead : bool = False
 
 
+    def on_hover() -> None:
+        pass
+
+    
+    def on_click() -> None:
+        print("I have been clicked!")
+
+
     def update(self) -> None:
         pass
 
 
-
+class Mouse:
+    position : tuple[int, int] = (0, 0)
+    left_click = False
+    right_click = False
 
 
 def main() -> None:
@@ -30,11 +41,15 @@ def main() -> None:
     screen : pygame.Surface = pygame.display.set_mode(resolution, pygame.RESIZABLE)
     viewport : pygame.Surface = pygame.surface.Surface((1920, 1080))
 
-    test : Element = Element((50, 50), "guy.png")
+    mouse : Mouse = Mouse()
 
     clock = pygame.time.Clock()
     fps = 60
     delta = 0
+
+
+    test : Element = Element((50, 50), "guy.png")
+
 
     while running:
         viewport.fill((0, 0, 0))
@@ -43,6 +58,16 @@ def main() -> None:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+        
+
+        mouse.position = pygame.mouse.get_pos()
+        mouse.left_click = pygame.mouse.get_just_pressed()[0]
+        mouse.right_click = pygame.mouse.get_just_pressed()[2]
+
+        if mouse.left_click:
+            print("left clicked!")
+        if mouse.right_click:
+            print("right clicked!")
 
         screen.blit(pygame.transform.scale(viewport, screen.get_rect().size), (0, 0))
         pygame.display.flip()

@@ -5,6 +5,7 @@ element         : a thing in the game, button in ui, etc.
 processgroup    : holds spritegroups of elements being processed (switches between game, ui, etc.)
 rendergroup     : holds spritegroups being drawn to the screen (allows overlay of game, ui, etc)
 
+mouse           : struct that holds mouse position and is_clicking
 
 LOOP:
     update processgroup
