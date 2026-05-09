@@ -25,6 +25,8 @@ def main() -> None:
     guy : Element = Element("guy.png", (350, 350))
     guy.add(rendergroup, processgroup)
 
+    rendergroup.create("tree.png", (1000, 1000))
+
 
     while running:
         viewport.fill((0, 0, 0))
