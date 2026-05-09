@@ -16,7 +16,10 @@ class Element(pygame.sprite.Sprite):
 
 
     def on_hover(self) -> None:
-        print("Hovering.")
+        newsize : tuple[int, int] = tuple(size + size // 10 for size in self.size)
+
+        self.image = pygame.transform.scale(self.image, newsize)
+        self.rect = self.image.get_rect()
 
     
     def on_click(self) -> None:
@@ -26,8 +29,8 @@ class Element(pygame.sprite.Sprite):
             self.image = pygame.image.load(os.path.join("assets", "guy.png")).convert_alpha()
         
         self.dead = not self.dead
-        print("I have been clicked!")
 
 
     def update(self) -> None:
-        pass
+        self.image = pygame.transform.scale(self.image, self.size)
+        self.rect = self.image.get_rect()
