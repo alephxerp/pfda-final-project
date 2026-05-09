@@ -1,7 +1,7 @@
 import pygame, os
 
 class Element(pygame.sprite.Sprite):
-    def __init__(self, position : tuple[int, int], sprite : str) -> None:
+    def __init__(self, sprite : str, position : tuple[int, int] = (0, 0)) -> None:
         pygame.sprite.Sprite.__init__(self)
 
         self.position : tuple[int, int] = position
@@ -34,3 +34,8 @@ class Element(pygame.sprite.Sprite):
     def update(self) -> None:
         self.image = pygame.transform.scale(self.image, self.size)
         self.rect = self.image.get_rect()
+
+
+class ElementGroup(pygame.sprite.Group):
+    def __init__(self, position : tuple[int, int] = (0, 0)):
+        pygame.sprite.Group.__init__(self)

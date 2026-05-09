@@ -19,7 +19,7 @@ def main() -> None:
     delta = 0
 
 
-    test : Element = Element((50, 50), "guy.png")
+    test : Element = Element("guy.png", (50, 50))
 
 
     while running:
