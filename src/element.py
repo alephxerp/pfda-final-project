@@ -29,6 +29,9 @@ class Element(pygame.sprite.Sprite):
         else:
             self.image = pygame.image.load(os.path.join("assets", "guy.png")).convert_alpha()
         
+        self.rect = self.image.get_rect()
+        self.rect.center = self.position
+        
         self.dead = not self.dead
 
 

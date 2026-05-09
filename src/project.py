@@ -22,10 +22,13 @@ def main() -> None:
     rendergroup : ElementGroup = ElementGroup()
     processgroup : ElementGroup = ElementGroup()
 
-    guy : Element = Element("guy.png", (350, 350))
-    guy.add(rendergroup, processgroup)
+    game : ElementGroup = ElementGroup()
+    game.create("guy.png", (350, 350))
+    game.create("guy.png", (700, 200))
+    game.create("guy.png", (1500, 950))
 
-    rendergroup.create("tree.png", (1000, 1000))
+    for element in game:
+        element.add(rendergroup, processgroup)
 
 
     while running:
