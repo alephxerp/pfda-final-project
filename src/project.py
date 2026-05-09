@@ -28,11 +28,16 @@ def main() -> None:
     game.create("guy.png", (700, 200))
     game.create("guy.png", (1500, 950))
 
-    button : Button = Button("guy.png", print, 7, 1, position=(960, 540))
-    button.add(rendergroup, processgroup)
-
     for element in game:
         element.add(rendergroup, processgroup)
+
+
+    menu : ElementGroup = ElementGroup()
+    resume : Button = Button("button_resume.png", print, position=(200, 200))
+    resume.add(menu)
+    exit : Button = Button("button_exit.png", print, position=(200, 500))
+    exit.add(menu)
+
 
 
     while running:
@@ -43,6 +48,11 @@ def main() -> None:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+        
+        keys : list[bool] = pygame.key.get_just_pressed()
+        if keys[pygame.K_ESCAPE]:
+            for element in menu:
+                element.add(rendergroup, processgroup)
         
 
         mouse.update(viewport, screen)
