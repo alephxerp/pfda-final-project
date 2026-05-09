@@ -1,5 +1,5 @@
 import pygame, sys, os
-from element import Element
+from element import Element, ElementGroup
 from mouse import Mouse
 
 
@@ -10,7 +10,7 @@ def main() -> None:
 
     pygame.display.set_caption("Final Project")
     screen : pygame.Surface = pygame.display.set_mode(resolution, pygame.RESIZABLE)
-    viewport : pygame.Surface = pygame.surface.Surface((1920, 1080))
+    viewport : pygame.Surface = pygame.Surface((1920, 1080))
 
     mouse : Mouse = Mouse()
 
@@ -19,11 +19,17 @@ def main() -> None:
     delta = 0
 
 
-    test : Element = Element("guy.png", (50, 50))
+    rendergroup : ElementGroup = ElementGroup()
+    processgroup : ElementGroup = ElementGroup()
+
+    guy : Element = Element("guy.png", (350, 350))
+    guy.add(rendergroup, processgroup)
 
 
     while running:
         viewport.fill((0, 0, 0))
+
+        processgroup.process()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -32,13 +38,15 @@ def main() -> None:
 
         mouse.update(viewport, screen)
 
-        if test.rect.collidepoint(mouse.position):
-            test.on_hover()
+        for element in processgroup:
+            if element.rect.collidepoint(mouse.position):
+                element.on_hover()
 
-            if mouse.left_click or mouse.right_click:
-                test.on_click()
+                if mouse.left_click or mouse.right_click:
+                    element.on_click()
 
-        viewport.blit(test.image, (50, 50))
+        rendergroup.render()
+        viewport.blit(rendergroup.image, rendergroup.position)
 
         screen.blit(pygame.transform.scale(viewport, screen.get_rect().size), (0, 0))
         pygame.display.flip()
