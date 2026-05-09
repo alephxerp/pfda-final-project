@@ -1,6 +1,7 @@
 import pygame, sys, os
 from element import Element, ElementGroup
 from mouse import Mouse
+from button import Button
 
 
 def main() -> None:
@@ -26,6 +27,9 @@ def main() -> None:
     game.create("guy.png", (350, 350))
     game.create("guy.png", (700, 200))
     game.create("guy.png", (1500, 950))
+
+    button : Button = Button("guy.png", print("Hello"), (960, 540))
+    button.add(rendergroup, processgroup)
 
     for element in game:
         element.add(rendergroup, processgroup)
