@@ -28,7 +28,7 @@ def main() -> None:
     game.create("guy.png", (700, 200))
     game.create("guy.png", (1500, 950))
 
-    button : Button = Button("guy.png", print, "Hello", position=(960, 540))
+    button : Button = Button("guy.png", print, 7, 1, position=(960, 540))
     button.add(rendergroup, processgroup)
 
     for element in game:

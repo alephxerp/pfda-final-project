@@ -10,4 +10,7 @@ class Button(Element):
 
     
     def on_click(self):
-        return self.function(*self.args)
+        try:
+            return self.function(*self.args)
+        except Exception as e:
+            print(f"{Exception} encountered while calling {self.function} on {self.args}")
