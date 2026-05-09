@@ -9,16 +9,22 @@ class Element(pygame.sprite.Sprite):
 
         self.image : pygame.Surface = pygame.image.load(os.path.join("assets", sprite)).convert_alpha()
         self.rect : pygame.Rect = self.image.get_rect()
-        self.rect.center = position
+        self.rect.topleft = self.position
 
         self.dead : bool = False
 
 
     def on_hover(self) -> None:
-        pass
+        print("Hovering.")
 
     
     def on_click(self) -> None:
+        if self.dead:
+            self.image = pygame.image.load(os.path.join("assets", "tree.png")).convert_alpha()
+        else:
+            self.image = pygame.image.load(os.path.join("assets", "guy.png")).convert_alpha()
+        
+        self.dead = ~self.dead
         print("I have been clicked!")
 
 
@@ -69,8 +75,11 @@ def main() -> None:
         if mouse.right_click:
             print("right clicked!")
 
-        if test.rect.collidepoint(mouse.position) and (mouse.left_click or mouse.right_click): 
-            test.on_click()
+        if test.rect.collidepoint(mouse.position): 
+            test.on_hover()
+
+            if mouse.left_click or mouse.right_click:
+                test.on_click()
 
         screen.blit(pygame.transform.scale(viewport, screen.get_rect().size), (0, 0))
         pygame.display.flip()
