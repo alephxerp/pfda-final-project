@@ -33,9 +33,9 @@ def main() -> None:
 
 
     menu : ElementGroup = ElementGroup()
-    resume : Button = Button("button_resume.png", print, position=(200, 200))
+    resume : Button = Button("button_resume.png", print, position=(50, 50))
     resume.add(menu)
-    exit : Button = Button("button_exit.png", print, position=(200, 500))
+    exit : Button = Button("button_exit.png", print, position=(50, 300))
     exit.add(menu)
 
 
