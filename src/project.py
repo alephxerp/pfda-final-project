@@ -24,7 +24,7 @@ class Element(pygame.sprite.Sprite):
         else:
             self.image = pygame.image.load(os.path.join("assets", "guy.png")).convert_alpha()
         
-        self.dead = ~self.dead
+        self.dead = not self.dead
         print("I have been clicked!")
 
 
@@ -36,6 +36,11 @@ class Mouse:
     position : tuple[int, int] = (0, 0)
     left_click = False
     right_click = False
+
+    def update(self, viewport : pygame.Surface, screen : pygame.Surface) -> None:
+        self.position = tuple(real * viewportsize / screensize for real, viewportsize, screensize in zip(pygame.mouse.get_pos(), viewport.size, screen.size))
+        self.left_click = pygame.mouse.get_just_pressed()[0]
+        self.right_click = pygame.mouse.get_just_pressed()[2]
 
 
 def main() -> None:
@@ -66,9 +71,7 @@ def main() -> None:
                 running = False
         
 
-        mouse.position = pygame.mouse.get_pos()
-        mouse.left_click = pygame.mouse.get_just_pressed()[0]
-        mouse.right_click = pygame.mouse.get_just_pressed()[2]
+        mouse.update(viewport, screen)
 
         if mouse.left_click:
             print("left clicked!")
