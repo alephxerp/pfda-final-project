@@ -1,8 +1,8 @@
 import pygame, sys, os
 from element import Element, ElementGroup
+from button import Button, ButtonGroup
+from character import Character, CharacterGroup
 from mouse import Mouse
-from button import Button
-from character import Character
 
 
 rendergroup : ElementGroup = ElementGroup()
@@ -49,19 +49,18 @@ def main() -> None:
     fps = 60
     delta = 0
 
-    game : ElementGroup = ElementGroup()
-    game.create("guy.png", (350, 350))
-    game.create("guy.png", (700, 200))
-    game.create("guy.png", (1500, 950))
+    game : CharacterGroup = CharacterGroup()
+    game.create("guy.png", "", (350, 350))
+    game.create("guy.png", "", (700, 200))
+    game.create("guy.png", "", (1500, 950))
 
     add_render(game)
     add_process(game)
 
 
-    menu : ElementGroup = ElementGroup()
-    resume : Button = Button("button_resume.png", print, position=(50, 50))
-    exit : Button = Button("button_exit.png", sys.exit, position=(50, 300))
-    menu.add(resume, exit)
+    menu : ButtonGroup = ButtonGroup()
+    menu.create("button_resume.png", print, position=(50, 50))
+    menu.create("button_exit.png", sys.exit, position=(50, 300))
 
     paused : bool = False
     

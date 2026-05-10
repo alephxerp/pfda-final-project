@@ -35,6 +35,7 @@ class ButtonGroup(ElementGroup):
 
     def create(self, sprite : str, function : callable, *args, position : tuple[int, int] = (0, 0)) -> Button:
         button : Button = Button(sprite, function, *args, position)
+        button.position = position
         self.add(button)
 
         return button
