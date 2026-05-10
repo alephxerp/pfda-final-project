@@ -52,9 +52,14 @@ def main() -> None:
     delta = 0
 
     game : CharacterGroup = CharacterGroup()
-    game.create("guy.png", ["i am number one guy"], (350, 350))
-    game.create("guy.png", ["i am number two guy", "i speak twice"], (700, 200))
-    game.create("guy.png", ["i am guy de french", "i speak french"], (1500, 950))
+    game.create("guy.png", ["i am number one guy", "my car seems to be broken..."], (350, 350))
+    game.create("car.png", ["(it seems to be broken)"], (650, 325))
+    game.create("mechanic.png", ["i was called here to fix this car", "which seems to be broken"], (950, 330))
+    game.create("sign.png", ["(this way to town)"], (1500, 300))
+    game.create("man.png", ["welcome", "click around to see what people say", "or click [esc] to open the menu"], (225, 800))
+    game.create("rock.png", ["(it's a rock)"], (850, 950))
+    game.create("guy.png", ["i am number two guy", "just waiting for the car to be fixed"], (1400, 630))
+    game.create("guy_french.png", ["i am guy de french", "i speak french"], (1650, 640))
 
     add_render(game)
     add_process(game)
