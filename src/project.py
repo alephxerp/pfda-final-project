@@ -51,9 +51,9 @@ def main() -> None:
     delta = 0
 
     game : CharacterGroup = CharacterGroup()
-    game.create("guy.png", "i am number one guy", (350, 350))
-    game.create("guy.png", "i am number two guy", (700, 200))
-    game.create("guy.png", "i am guy de french", (1500, 950))
+    game.create("guy.png", ["i am number one guy"], (350, 350))
+    game.create("guy.png", ["i am number two guy", "i speak twice"], (700, 200))
+    game.create("guy.png", ["i am guy de french", "i speak french"], (1500, 950))
 
     add_render(game)
     add_process(game)
@@ -93,9 +93,9 @@ def main() -> None:
         if keys[pygame.K_SPACE]:
             if dialogue.speaking:
                 dialogue.on_click()
-                dialogue.speaking = not dialogue.speaking
-                remove_render(dialoguegroup)
-                change_process(game)
+                if not dialogue.speaking:
+                    remove_render(dialoguegroup)
+                    change_process(game)
         
 
         mouse.update(viewport, screen)
@@ -118,7 +118,7 @@ def main() -> None:
                             paused = False
                     
                     elif type(element) is Character:
-                        dialogue.speak(element.on_click())
+                        dialogue.start(element.on_click())
                         add_render(dialoguegroup)
                         change_process(dialoguegroup)
 

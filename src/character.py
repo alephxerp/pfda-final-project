@@ -2,10 +2,10 @@ import pygame, os
 from element import Element, ElementGroup
 
 class Character(Element):
-    def __init__(self, sprite : str, dialogue : str, position : tuple[int, int] = (0, 0)) -> None:
+    def __init__(self, sprite : str, dialogue : list[str], position : tuple[int, int] = (0, 0)) -> None:
         Element.__init__(self, sprite, position)
 
-        self.dialogue : str = dialogue
+        self.dialogue : list[str] = dialogue
 
 
     def on_click(self) -> str:
@@ -17,7 +17,7 @@ class CharacterGroup(ElementGroup):
         ElementGroup.__init__(self)
     
 
-    def create(self, sprite : str, dialogue: str, position : tuple[int, int] = (0, 0)) -> Character:
+    def create(self, sprite : str, dialogue: list[str], position : tuple[int, int] = (0, 0)) -> Character:
         character : Character = Character(sprite, dialogue, position)
         character.position = position
         self.add(character)

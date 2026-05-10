@@ -9,6 +9,9 @@ class DialogueManager(Element):
         self.image : pygame.Surface = self.background.copy()
         self.font : pygame.Font = pygame.font.SysFont("arial", 64)
 
+        self.dialogue : list[str] = []
+        self.index : int = 0
+
         self.rect : pygame.Rect = self.image.get_rect()
         self.rect.center = (960, 830)
 
@@ -20,15 +23,27 @@ class DialogueManager(Element):
 
     
     def on_click(self) -> None:
-        if self.speaking:
+        if self.index >= len(self.dialogue):
             self.image = self.background.copy()
             self.speaking = False
+        else:
+            self.image = self.background.copy()
+            self.speak()
+
     
-    
-    def speak(self, dialogue : str) -> None:
-        text : pygame.Surface = self.font.render(dialogue, True, (0, 0, 0))
-        self.image.blit(text, (100, 100))
+    def start(self, dialogue : list[str]) -> None:
+        self.dialogue = dialogue
+        self.index = 0
         self.speaking = True
+
+        self.speak()
+    
+    
+    def speak(self) -> None:
+        text : pygame.Surface = self.font.render(self.dialogue[self.index], True, (0, 0, 0))
+        self.image.blit(text, (100, 100))
+        
+        self.index += 1
     
 
     def update(self) -> None:
