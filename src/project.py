@@ -7,6 +7,7 @@ from mouse import Mouse
 
 
 rendergroup : ElementGroup = ElementGroup()
+rendergroup.set_background("background.png")
 processgroup : ElementGroup = ElementGroup()
 
 def add_render(elementgroup : ElementGroup) -> None:
@@ -58,13 +59,15 @@ def main() -> None:
     add_render(game)
     add_process(game)
 
-
     menu : ButtonGroup = ButtonGroup()
+    menutint : Element = Element("menu_tint.png", (960, 540))
+    menutint.add(menu)
+
     menu.create("button_resume.png", print, position=(50, 50))
     menu.create("button_exit.png", sys.exit, position=(50, 300))
 
     paused : bool = False
-
+    
 
     dialogue : DialogueManager = DialogueManager()
     dialoguegroup : ElementGroup = ElementGroup()

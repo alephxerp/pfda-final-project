@@ -52,8 +52,8 @@ class ElementGroup(pygame.sprite.Group):
             element.update()
     
 
-    def set_background(self, background : pygame.Surface) -> pygame.Surface:
-        self.background = background
+    def set_background(self, background : str) -> pygame.Surface:
+        self.background = pygame.image.load(os.path.join("assets", background))
         return self.background
 
 
