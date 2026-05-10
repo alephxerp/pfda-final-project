@@ -1,7 +1,7 @@
 # POINT AND CLICK PROTOTYPE
 
 ## Demo
-Demo Video: <URL>
+Demo Video: <https://www.youtube.com/watch?v=YXHMIO2DpCI>
 
 ## GitHub Repository
 GitHub Repo: <https://github.com/alephxerp/pfda-final-project>
