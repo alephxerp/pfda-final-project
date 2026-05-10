@@ -5,6 +5,35 @@ from button import Button
 from character import Character
 
 
+rendergroup : ElementGroup = ElementGroup()
+processgroup : ElementGroup = ElementGroup()
+
+def add_render(elementgroup : ElementGroup):
+    for element in elementgroup:
+        element.add(rendergroup)
+
+def remove_render(elementgroup : ElementGroup):
+    for element in elementgroup:
+        element.remove(rendergroup)
+
+def change_render(elementgroup : ElementGroup):
+    rendergroup.empty()
+    add_render(elementgroup)
+
+def add_process(elementgroup : ElementGroup):
+    for element in elementgroup:
+        element.add(processgroup)
+
+def remove_process(elementgroup : ElementGroup):
+    for element in elementgroup:
+        element.remove(processgroup)
+
+def change_process(elementgroup : ElementGroup):
+    processgroup.empty()
+    add_process(elementgroup)
+
+
+
 def main() -> None:
     pygame.init()
     resolution : tuple[int, int] = (1280, 720)
@@ -20,16 +49,13 @@ def main() -> None:
     fps = 60
     delta = 0
 
-    rendergroup : ElementGroup = ElementGroup()
-    processgroup : ElementGroup = ElementGroup()
-
     game : ElementGroup = ElementGroup()
     game.create("guy.png", (350, 350))
     game.create("guy.png", (700, 200))
     game.create("guy.png", (1500, 950))
 
-    for element in game:
-        element.add(rendergroup, processgroup)
+    add_render(game)
+    add_process(game)
 
 
     menu : ElementGroup = ElementGroup()
@@ -51,16 +77,12 @@ def main() -> None:
         keys : list[bool] = pygame.key.get_just_pressed()
         if keys[pygame.K_ESCAPE]:
             if paused == False:
-                for element in menu:
-                    element.add(rendergroup, processgroup)
-                for element in game:
-                    element.remove(processgroup)
+                add_render(menu)
+                change_process(menu)
                 paused = True
             else:
-                for element in menu:
-                    element.remove(rendergroup, processgroup)
-                for element in game:
-                    element.add(processgroup)
+                remove_render(menu)
+                change_process(game)
                 paused = False
         
 
@@ -75,16 +97,12 @@ def main() -> None:
                     if type(element) is Button:
                         element.on_click()
                         if paused == False:
-                            for element in menu:
-                                element.add(rendergroup, processgroup)
-                            for element in game:
-                                element.remove(processgroup)
+                            add_render(menu)
+                            change_process(menu)
                             paused = True
                         else:
-                            for element in menu:
-                                element.remove(rendergroup, processgroup)
-                            for element in game:
-                                element.add(processgroup)
+                            remove_render(menu)
+                            change_process(game)
                             paused = False
                     
                     elif type(element) is Character:
