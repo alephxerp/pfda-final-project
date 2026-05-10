@@ -17,9 +17,9 @@ class CharacterGroup(ElementGroup):
         ElementGroup.__init__(self)
     
 
-    def create(self, sprite : str, dialogue: str, position : tuple[int, int] = (0, 0)) -> Element:
-        element : Character = Character(sprite, dialogue, position)
-        self.add(element)
+    def create(self, sprite : str, dialogue: str, position : tuple[int, int] = (0, 0)) -> Character:
+        character : Character = Character(sprite, dialogue, position)
+        self.add(character)
 
-        return element
+        return character
 

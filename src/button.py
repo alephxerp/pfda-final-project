@@ -1,5 +1,5 @@
 import pygame, os
-from element import Element
+from element import Element, ElementGroup
 
 class Button(Element):
     def __init__(self, sprite : str, function : callable, *args, position : tuple[int, int] = (0, 0)) -> None:
@@ -26,3 +26,15 @@ class Button(Element):
             return self.function(*self.args)
         except Exception as e:
             print(f"{Exception} encountered while calling {self.function} on {self.args}")
+
+
+class ButtonGroup(ElementGroup):
+    def __init__(self) -> None:
+        ElementGroup.__init__(self)
+    
+
+    def create(self, sprite : str, function : callable, *args, position : tuple[int, int] = (0, 0)) -> Button:
+        button : Button = Button(sprite, function, *args, position)
+        self.add(button)
+
+        return button
