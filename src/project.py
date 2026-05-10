@@ -91,7 +91,10 @@ def main() -> None:
                 paused = True
             else:
                 remove_render(menu)
-                change_process(game)
+                if dialogue.speaking:
+                    change_process(dialoguegroup)
+                else:
+                    change_process(game)
                 paused = False
         if keys[pygame.K_SPACE]:
             if dialogue.speaking:
@@ -117,7 +120,10 @@ def main() -> None:
                             paused = True
                         else:
                             remove_render(menu)
-                            change_process(game)
+                            if dialogue.speaking:
+                                change_process(dialoguegroup)
+                            else:
+                                change_process(game)
                             paused = False
                     
                     elif type(element) is Character:
