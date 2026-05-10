@@ -34,12 +34,11 @@ def main() -> None:
 
     menu : ElementGroup = ElementGroup()
     resume : Button = Button("button_resume.png", print, position=(50, 50))
-    resume.add(menu)
-    exit : Button = Button("button_exit.png", print, position=(50, 300))
-    exit.add(menu)
+    exit : Button = Button("button_exit.png", sys.exit, position=(50, 300))
+    menu.add(resume, exit)
 
     paused : bool = False
-
+    
     while running:
         viewport.fill((0, 0, 0))
 
@@ -74,8 +73,7 @@ def main() -> None:
                 if mouse.left_click or mouse.right_click:
                     element.on_click()
 
-        rendergroup.render()
-        viewport.blit(rendergroup.image, rendergroup.position)
+        viewport.blit(rendergroup.render())
 
         screen.blit(pygame.transform.scale(viewport, screen.get_rect().size), (0, 0))
         pygame.display.flip()

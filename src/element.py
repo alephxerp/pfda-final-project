@@ -42,11 +42,12 @@ class Element(pygame.sprite.Sprite):
 
 
 class ElementGroup(pygame.sprite.Group):
-    def __init__(self, position : tuple[int, int] = (0, 0)) -> None:
+    def __init__(self) -> None:
         pygame.sprite.Group.__init__(self)
 
-        self.image : pygame.Surface = pygame.Surface((1920, 1080))
-        self.position : tuple[int, int] = position
+        self.background : pygame.Surface = pygame.Surface((1920, 1080))
+        self.background.fill((0, 0, 0))
+        self.image : pygame.Surface = self.background.copy()
     
 
     def create(self, sprite : str, position : tuple[int, int] = (0, 0)) -> Element:
@@ -61,8 +62,13 @@ class ElementGroup(pygame.sprite.Group):
             element.update()
     
 
+    def set_background(self, background : pygame.Surface) -> pygame.Surface:
+        self.background = background
+        return self.background
+
+
     def render(self) -> pygame.Surface:
-        self.image.fill((0, 0, 0))
+        self.image = self.background.copy()
         self.draw(self.image)
 
         return self.image
