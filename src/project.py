@@ -2,6 +2,7 @@ import pygame, sys, os
 from element import Element, ElementGroup
 from button import Button, ButtonGroup
 from character import Character, CharacterGroup
+from dialogue import DialogueManager
 from mouse import Mouse
 
 
@@ -63,6 +64,10 @@ def main() -> None:
     menu.create("button_exit.png", sys.exit, position=(50, 300))
 
     paused : bool = False
+
+
+    dialogue : DialogueManager = DialogueManager()
+
     
     while running:
         viewport.fill((0, 0, 0))
