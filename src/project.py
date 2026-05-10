@@ -90,6 +90,12 @@ def main() -> None:
                 remove_render(menu)
                 change_process(game)
                 paused = False
+        if keys[pygame.K_SPACE]:
+            if dialogue.speaking:
+                dialogue.on_click()
+                dialogue.speaking = not dialogue.speaking
+                remove_render(dialoguegroup)
+                change_process(game)
         
 
         mouse.update(viewport, screen)
