@@ -38,7 +38,7 @@ def main() -> None:
     exit : Button = Button("button_exit.png", print, position=(50, 300))
     exit.add(menu)
 
-
+    paused : bool = False
 
     while running:
         viewport.fill((0, 0, 0))
@@ -51,8 +51,18 @@ def main() -> None:
         
         keys : list[bool] = pygame.key.get_just_pressed()
         if keys[pygame.K_ESCAPE]:
-            for element in menu:
-                element.add(rendergroup, processgroup)
+            if paused == False:
+                for element in menu:
+                    element.add(rendergroup, processgroup)
+                for element in game:
+                    element.remove(processgroup)
+                paused = True
+            else:
+                for element in menu:
+                    element.remove(rendergroup, processgroup)
+                for element in game:
+                    element.add(processgroup)
+                paused = False
         
 
         mouse.update(viewport, screen)
