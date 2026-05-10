@@ -9,27 +9,27 @@ from mouse import Mouse
 rendergroup : ElementGroup = ElementGroup()
 processgroup : ElementGroup = ElementGroup()
 
-def add_render(elementgroup : ElementGroup):
+def add_render(elementgroup : ElementGroup) -> None:
     for element in elementgroup:
         element.add(rendergroup)
 
-def remove_render(elementgroup : ElementGroup):
+def remove_render(elementgroup : ElementGroup) -> None:
     for element in elementgroup:
         element.remove(rendergroup)
 
-def change_render(elementgroup : ElementGroup):
+def change_render(elementgroup : ElementGroup) -> None:
     rendergroup.empty()
     add_render(elementgroup)
 
-def add_process(elementgroup : ElementGroup):
+def add_process(elementgroup : ElementGroup) -> None:
     for element in elementgroup:
         element.add(processgroup)
 
-def remove_process(elementgroup : ElementGroup):
+def remove_process(elementgroup : ElementGroup) -> None:
     for element in elementgroup:
         element.remove(processgroup)
 
-def change_process(elementgroup : ElementGroup):
+def change_process(elementgroup : ElementGroup) -> None:
     processgroup.empty()
     add_process(elementgroup)
 
@@ -67,6 +67,8 @@ def main() -> None:
 
 
     dialogue : DialogueManager = DialogueManager()
+    dialoguegroup : ElementGroup = ElementGroup()
+    dialogue.add(dialoguegroup)
 
     
     while running:
@@ -110,10 +112,16 @@ def main() -> None:
                             paused = False
                     
                     elif type(element) is Character:
-                        pass
+                        dialogue.speak(element.on_click())
+                        add_render(dialoguegroup)
+                        change_process(dialoguegroup)
 
-                    else:
+                    elif type(element) is DialogueManager:
                         element.on_click()
+                        if not element.speaking:
+                            remove_render(dialoguegroup)
+                            change_process(game)
+        
 
         viewport.blit(rendergroup.render())
 
