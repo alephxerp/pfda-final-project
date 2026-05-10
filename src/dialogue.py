@@ -21,6 +21,7 @@ class DialogueManager(Element):
     
     def on_click(self) -> None:
         if self.speaking:
+            self.image = self.background.copy()
             self.speaking = False
     
     

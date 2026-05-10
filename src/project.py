@@ -51,9 +51,9 @@ def main() -> None:
     delta = 0
 
     game : CharacterGroup = CharacterGroup()
-    game.create("guy.png", "", (350, 350))
-    game.create("guy.png", "", (700, 200))
-    game.create("guy.png", "", (1500, 950))
+    game.create("guy.png", "i am number one guy", (350, 350))
+    game.create("guy.png", "i am number two guy", (700, 200))
+    game.create("guy.png", "i am guy de french", (1500, 950))
 
     add_render(game)
     add_process(game)
