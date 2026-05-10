@@ -73,6 +73,7 @@ def main() -> None:
                 if mouse.left_click or mouse.right_click:
                     # Janky temporary solution for resume button.
                     if type(element) is Button:
+                        element.on_click()
                         if paused == False:
                             for element in menu:
                                 element.add(rendergroup, processgroup)
