@@ -12,8 +12,6 @@ class Element(pygame.sprite.Sprite):
 
         self.size : tuple[int, int] = self.rect.size
 
-        self.dead : bool = False
-
 
     def on_hover(self) -> None:
         newsize : tuple[int, int] = tuple(size + size // 10 for size in self.size)
@@ -24,15 +22,7 @@ class Element(pygame.sprite.Sprite):
 
     
     def on_click(self) -> None:
-        if self.dead:
-            self.image = pygame.image.load(os.path.join("assets", "tree.png")).convert_alpha()
-        else:
-            self.image = pygame.image.load(os.path.join("assets", "guy.png")).convert_alpha()
-        
-        self.rect = self.image.get_rect()
-        self.rect.center = self.position
-        
-        self.dead = not self.dead
+        pass
 
 
     def update(self) -> None:

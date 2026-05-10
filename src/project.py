@@ -2,6 +2,7 @@ import pygame, sys, os
 from element import Element, ElementGroup
 from mouse import Mouse
 from button import Button
+from character import Character
 
 
 def main() -> None:
@@ -18,7 +19,6 @@ def main() -> None:
     clock = pygame.time.Clock()
     fps = 60
     delta = 0
-
 
     rendergroup : ElementGroup = ElementGroup()
     processgroup : ElementGroup = ElementGroup()
@@ -71,7 +71,26 @@ def main() -> None:
                 element.on_hover()
 
                 if mouse.left_click or mouse.right_click:
-                    element.on_click()
+                    # Janky temporary solution for resume button.
+                    if type(element) is Button:
+                        if paused == False:
+                            for element in menu:
+                                element.add(rendergroup, processgroup)
+                            for element in game:
+                                element.remove(processgroup)
+                            paused = True
+                        else:
+                            for element in menu:
+                                element.remove(rendergroup, processgroup)
+                            for element in game:
+                                element.add(processgroup)
+                            paused = False
+                    
+                    elif type(element) is Character:
+                        pass
+
+                    else:
+                        element.on_click()
 
         viewport.blit(rendergroup.render())
 
